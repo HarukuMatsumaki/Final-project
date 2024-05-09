@@ -1,21 +1,7 @@
 from flask import Flask, url_for
 from flask import request
-import os
-import hashlib
-import datetime
-import sqlalchemy
-from data import db_session
-from data.users import User
-from sqlalchemy.orm import Session, sessionmaker
-
-
-
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-
-
-
 
 
 @app.route('/')
@@ -84,10 +70,9 @@ def greeting(username):
                 </html>'''
 
 
-@app.route('/registration', methods=['POST', 'GET'])
+@app.route('/form_sample', methods=['POST', 'GET'])
 def form_sample():
     if request.method == 'GET':
-        request.method == 'POST'
         return f'''<!doctype html>
                         <html lang="en">
                           <head>
@@ -98,16 +83,14 @@ def form_sample():
                             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
                             crossorigin="anonymous">
                             <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
-                            <title>Регистрация</title>
+                            <title>Пример формы</title>
                           </head>
                           <body>
-                            <h1>Новый ящик</h1>
+                            <h1>Анкета претендента на участие в миссии</h1>
                             <div>
                                 <form class="login_form" method="post">
-                                    <input type="text" class="form-control" id="sname" placeholder="Введите фамилию" name="sname">
-                                    <input type="text" class="form-control" id="fname" placeholder="Введите имя" name="fname">
-                                    <input type="text" class="form-control" id="email" placeholder="Введите логин" name="email">
-                                    <input type="text" class="form-control" id="password" placeholder="Введите пароль" name="password">
+                                    <input type="text" class="form-control" id="email" placeholder="Введите фамилию" name="email">
+                                    <input type="text" class="form-control" id="password" placeholder="Введите имя" name="password">
             
                                     <div class="form-group">
                                         <label for="classSelect">Какое у вас образование</label>
@@ -117,34 +100,34 @@ def form_sample():
                                           <option>Высшее</option>
                                         </select>
                                      </div>
-                                    <h6>Ваши интересы</h6>
+
                                      <div class="form-group form-check">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="w" name="w">
-                                            <label class="form-check-label" for="w">Компьютерные игры</label>
+                                            <label class="form-check-label" for="w">инженер-исследователь</label>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="w" name="w">
-                                            <label class="form-check-label" for="w">Спорт</label>
+                                            <label class="form-check-label" for="w">пилот</label>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="w" name="w">
-                                            <label class="form-check-label" for="w">Искусство</label></div>
+                                            <label class="form-check-label" for="w">строитель</label></div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="w" name="w">
-                                            <label class="form-check-label" for="w">Фильмы и видео</label>
+                                            <label class="form-check-label" for="w">экзобиолог</label>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="w" name="w">
-                                            <label class="form-check-label" for="w">Еда и кулинария</label>
+                                            <label class="form-check-label" for="w">врач</label>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="w" name="w">
-                                            <label class="form-check-label" for="w">Пирожки</label>
+                                            <label class="form-check-label" for="w">инженер по терраформированию</label>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="w" name="w">
-                                            <label class="form-check-label" for="w">Наука</label>
+                                            <label class="form-check-label" for="w">климатолог</label>
                                         </div>
 
 
@@ -168,7 +151,7 @@ def form_sample():
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="about">Напишите, зачем вы хотите зарегистрироваться</label>
+                                        <label for="about">Почему вы хотите принять участие в миссии?</label>
                                         <textarea class="form-control" id="about" rows="3" name="about"></textarea>
                                     </div>
                                     <div class="form-group">
@@ -177,7 +160,7 @@ def form_sample():
                                     </div>
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="acceptRules" name="accept">
-                                        <label class="form-check-label" for="acceptRules">Готовы регалярно поддерживать общение?</label>
+                                        <label class="form-check-label" for="acceptRules">Готовы остаться на марсе?</label>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Записаться</button>
                                 </form>
@@ -185,77 +168,15 @@ def form_sample():
                           </body>
                         </html>'''
     elif request.method == 'POST':
-        print(db_session.query())
-##        if db_session.query(User).filter(User.email == form.email.data).first():
-##            return "Kabanistan is an independent region of Asia!"
-        return request.form
-        # return redirect('/login')
+        print(request.form['email'])
+        print(request.form['password'])
+        print(request.form['class'])
+        print(request.form['file'])
+        print(request.form['about'])
+        print(request.form['accept'])
+        print(request.form['sex'])
+        return "Форма отправлена"
     
 
-
-@app.route('/send', methods=['POST', 'GET'])
-def send():
-    if request.method == 'GET':
-        request.method == 'POST'
-        return '''<!doctype html>
-                    <html lang="en">
-                      <head>
-                        <meta charset="utf-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                        <link rel="stylesheet" 
-                        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
-                        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
-                        crossorigin="anonymous">
-                        <title>Отправка пакета информации</title>
-                      </head>
-                      <body>
-                      <div>
-                      <form class="send_form" method="post">
-                        <h1>Отправка пакета информации</h1>
-                        <div class="alert alert-primary" role="alert">
-                          После ввода данных, проверьте заполненные формы на правильность, пожалуйста!
-                        </div>
-                        <input type="text" class="form-control" id="email" placeholder="Введите логин" name="email">
-                        <input type="text" class="form-control" id="password" placeholder="Введите пароль" name="password">
-                        <input type="text" class="form-control" id="password" placeholder="Введите логин получателя" name="chel">
-                        <h1></h1>
-                        <div class="form-group">
-                            <label for="photo">Приложите пакет данных</label>
-                            <input type="file" class="form-control-file" id="file" name="file">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Отправить</button>
-                        </form>
-                        </div>
-                      </body>
-                    </html>'''
-    elif request.method == 'POST':
-        return request.form
-        # return redirect('/login')
-
-
-def nchel(password, salt, fname, sname, email, about):
-    user = User()
-    user.fname = fname
-    user.sname = sname
-    user.about = about
-    user.email = email
-    db_sess = db_session.create_session()
-    db_sess.add(user)
-    db_sess.commit()
-    salt = os.urandom(32)
-    key = hashlib.pbkdf2_hmac(
-    'sha256', # Используемый алгоритм хеширования
-    password.encode('utf-8'), # Конвертирование пароля в байты
-    salt, # Предоставление соли
-    100000, # Рекомендуется использоваться по крайней мере 100000 итераций SHA-256 
-    dklen=128 # Получает ключ в 128 байтов
-    )
-    return key
-
-def cchel(password, key, salt):
-    return nchel(password, salt) == key
-
-
 if __name__ == '__main__':
-    db_session.global_init("db/blogs.db")
     app.run(port=8080, host='127.0.0.1')
