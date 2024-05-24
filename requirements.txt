@@ -1,0 +1,4 @@
+flask
+sqlalchemy
+hashlib
+werkzeug.utils
