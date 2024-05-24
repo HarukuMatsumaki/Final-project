@@ -1,0 +1,15 @@
+﻿word = 'ДЕРЕВО'
+a = sorted(list(set([i for i in word])))
+k = 0
+for i0 in a:
+    for i1 in a:
+        for i2 in a:
+            for i3 in a:
+                for i4 in a:
+                    for i5 in a:
+                        result = i0 + i1 + i2 + i3 + i4 + i5
+                        x0 = [result[i] for i in range(len(result)) if not (i % 2)]
+                        x1 = [result[i] for i in range(len(result)) if i % 2]
+                        if sorted(x0) == x0 and sorted(x1) == x1:
+                            k += 1
+print(k)
